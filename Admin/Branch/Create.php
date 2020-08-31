@@ -96,7 +96,40 @@
                     <button type="reset" class="btn btn-success">Reset</button>
                 </center>
             </div>
-
+            <?php
+            $servername="localhost";
+            $username="root";
+            $password="";
+            $db="vceterp";
+            $con = new mysqli($servername,$username,$password,$db);
+            if(!$con)
+            {
+                die('could not connect'.mysql_error());
+            }
+            else
+            {
+                echo "<h1>database connected</h1>";
+            }  
+            if(isset($_POST['submit'])) {
+            $BranName = $_POST['txt_BranchName'];
+            $BranCode = $_POST['txt_BranchCode'];
+            $BranStatus = $_POST['select_BranchStatus'];
+            $sql1="SELECT max(Branch_Id) as id from branch_master";
+            $result = $con->query($sql1);
+            $row = $result->fetch_assoc();
+            echo "<br> last id is : ".$row['id'];
+            $BranId=$row['id']+1;
+            echo "<br> given id is : ".$BranId;
+            
+            $sql="INSERT INTO branch_master(Branch_Id,Branch_Name,Branch_Code,Branch_Status) VALUES('$BranId','$BranName','$BranCode','$BranStatus')";
+            
+            if($con->query($sql) === TRUE ){
+              echo "<br>new record added successfully";
+          }else{
+              echo "<br>error: ".$sql."<br>".$con->error;
+          }
+            }
+           ?>
             <input type="button" value="Back To List" onclick="window.location.href='Index.php'"
                 class="btn btn-primary" />
 
