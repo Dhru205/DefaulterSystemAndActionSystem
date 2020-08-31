@@ -68,7 +68,7 @@
             <div class="my-5">
 
                 <input type="button" value="Create" onclick="window.location.href='Create.php'" class="btn btn-primary" />
-                <div class="p-4">
+                <!-- <div class="p-4">
                      <table class="table table-hover">
                         <thead>
                             <tr>
@@ -82,7 +82,7 @@
 
                         </tbody>
                     </table> 
-                </div>
+                </div> -->
                 <?php
             $servername="localhost";
             $username="root";
@@ -98,14 +98,15 @@
                 echo "<h1>database connected</h1>";
             }  
             
-            echo '<div class="p-4" style="background-color: whitesmoke;">
+            echo '<div class="p-4">
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col" >Branch ID</th>
+                    <th scope="col" hidden>Branch ID</th>
                     <th scope="col">Branch Name</th>
                     <th scope="col">Branch Code</th>
                     <th scope="col">Branch Status</th>
+                    <th></th>
                   </tr> 
                 </thead>';
                 $sql = "SELECT Branch_Id,Branch_Name,Branch_Code,Branch_Status FROM branch_master";
@@ -114,14 +115,17 @@
 
                 while($row = mysqli_fetch_array($result))
                 {
-                          echo "<tr>";
-                          echo "<td>" . $row['Branch_Id'] . "</td>";
-                          echo "<td>" . $row['Branch_Name'] . "</td>";
-                          echo "<td>" . $row['Branch_Code'] . "</td>";
-                          echo "<td>" . $row['Branch_Status'] . "</td>";
-                          echo "</tr>";
-                          }
-                    
+                    echo "<tr>";
+                    echo "<td hidden>" . $row['Branch_Id'] . "</td>";
+                    echo "<td>" . $row['Branch_Name'] . "</td>";
+                    echo "<td>" . $row['Branch_Code'] . "</td>";
+                    echo "<td>" . $row['Branch_Status'] . "</td>";
+                    echo "<td><button type='button' class='btn btn-success'>Edit</button></td>";
+                    echo "</tr>";
+                }
+                
+                
+
               ?>
             </div>
         </div>
