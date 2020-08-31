@@ -69,7 +69,7 @@
 
                 <input type="button" value="Create" onclick="window.location.href='Create.php'" class="btn btn-primary" />
                 <div class="p-4">
-                    <table class="table table-hover">
+                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col" hidden>Branch ID</th>
@@ -81,8 +81,48 @@
                         <tbody>
 
                         </tbody>
-                    </table>
+                    </table> 
                 </div>
+                <?php
+            $servername="localhost";
+            $username="root";
+            $password="";
+            $db="vceterp";
+            $con = new mysqli($servername,$username,$password,$db);
+            if(!$con)
+            {
+                die('could not connect'.mysql_error());
+            }
+            else
+            {
+                echo "<h1>database connected</h1>";
+            }  
+            
+            echo '<div class="p-4" style="background-color: whitesmoke;">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" >Branch ID</th>
+                    <th scope="col">Branch Name</th>
+                    <th scope="col">Branch Code</th>
+                    <th scope="col">Branch Status</th>
+                  </tr> 
+                </thead>';
+                $sql = "SELECT Branch_Id,Branch_Name,Branch_Code,Branch_Status FROM branch_master";
+                $result = $con->query($sql);
+                //if ($result->num_rows > 0)
+
+                while($row = mysqli_fetch_array($result))
+                {
+                          echo "<tr>";
+                          echo "<td>" . $row['Branch_Id'] . "</td>";
+                          echo "<td>" . $row['Branch_Name'] . "</td>";
+                          echo "<td>" . $row['Branch_Code'] . "</td>";
+                          echo "<td>" . $row['Branch_Status'] . "</td>";
+                          echo "</tr>";
+                          }
+                    
+              ?>
             </div>
         </div>
 
